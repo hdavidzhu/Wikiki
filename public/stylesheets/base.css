@@ -4,20 +4,23 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.repo {
-    list-style: none;
+#container {
+    margin: 100px
 }
 
-.repo > p {
+/* List of Repo Page CSS*/
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.repo > li {
     padding: 20px 0px 0px 0px;
+    margin-left:0px;
 }
 
-.repo > p:hover {
+.repo > li:hover {
     color: purple;
     font-weight: bold;
     cursor: pointer;
-}
-
-#container {
-    margin: 100px
 }

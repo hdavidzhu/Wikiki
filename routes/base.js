@@ -1,17 +1,19 @@
 var Repos = require('../models/repo');
 var github = require('../github');
+var error = require('./callbacks').error;
 
 
 exports.index = function(req, res) {
-    res.render('index', {
-        name: 'John'
-    });
+    res.render('index');
 };
 
 
 exports.allRepos = function(req, res) {
     Repos.find({}, function(err, data) {
-        errorHandler(err, "Failed to load repos");
+        if (err) {
+            error(res, err, "Failed to load repos");
+            return;
+        }
         res.json({
             "repos": data
         });
@@ -25,26 +27,20 @@ exports.addRepo = function(req, res) {
     // Error Checking
     var index = url.indexOf("github.com/");
     if (index === -1) {
-        res.status(200).json({
-            error: "invalid github url"
-        });
+        error(res, null, "Not a Github Url");
         return;
     }
 
     var parts = url.substring(index, url.length).split("/");
     if (parts.length !== 3) {
-        res.status(200).json({
-            error: "invalid github url"
-        });
+        error(res, null, "Invalid Url Pattern");
         return;
     }
 
     // Validate Github API
-    github.validateREPO(parts[1], parts[2], function(err, data) {
-        if (err) {
-            res.status(200).json({
-                error: "invalid github url"
-            });
+    github.validateREPO(parts[1], parts[2], function (err, response, body) {
+        if (err || response.statusCode/10 !== 20) {
+            error(res, err, "Invalid Github Url");
             return;
         }
         Repos({
@@ -52,22 +48,20 @@ exports.addRepo = function(req, res) {
             owner: parts[1]
         }).save(function(err, data) {
             if (err) {
-                res.status(500).json({
-                    error: "Failed to save Repo"
-                });
+                error(res, err, "Could not save Github Repo");
+                return;
             }
-            res.status(200).json({
-                success: true
+
+            github.forkRepo(parts[1], parts[2], function (err, response, body) {
+                if (err) {
+                    error(res, err, "Could not fork Github");
+                    return;
+                }
+
+                res.status(200).json({
+                    success: true
+                });
             });
         });
     });
-}
-
-
-var errorHandler = function(err, msg) {
-    if (err) {
-        res.status(500).json({
-            error: msg + "::\t" + err,
-        });
-    }
 }

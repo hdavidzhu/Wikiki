@@ -1,6 +1,6 @@
 var RepoListBox = React.createClass({
   render: function() {
-    server.GET('/allRepos', function (data) {
+    server.GET('/allRepos', null, function (data) {
       React.render(
           <div>
             <AddRepoForm />
@@ -21,16 +21,13 @@ var AddRepoForm = React.createClass({
     var input = $('input#githuburl').val();
 
     server.POST('/addRepo', {url: input}, function (data) {
-      console.log(data.error);
-      if (data.error) {
-        alert("Make sure URL is an existing Github HTTPS Clone URL");
-        return;
-      }
       // Repopulate Repos
       React.render(
         <RepoListBox />,
         document.getElementById('container')
       );
+    }, function (err, status) {
+      alert("Make sure URL is an existing Github HTTPS Clone URL");
     });
   },
 
@@ -46,12 +43,25 @@ var AddRepoForm = React.createClass({
 var ReposList = React.createClass({
   render: function () {
     return (
-      <div className="repo"> {
+      <ul className="repo"> {
         this.props.repos.map(
           function (repo) {
-              return <p> @{repo.owner}/{repo.name} </p>;
+              return <Repo owner={repo.owner} name={repo.name} />
           })
-      }</div>
+      }</ul>
     );
   }
 });
+
+
+var Repo = React.createClass({
+  OnClick: function () {
+    React.render(
+      <RepoPage owner={this.props.owner} name={this.props.name} />,
+      document.getElementById('container'));
+      return true;
+  },
+  render: function () {
+    return (<li onClick={this.OnClick}>@{this.props.owner}/{this.props.name}</li>)
+  }
+})

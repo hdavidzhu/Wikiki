@@ -4,7 +4,7 @@ var Navbar = React.createClass({
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="#">WikiHub</a>
+                        <a className="navbar-brand" href="/">WikiHub</a>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
