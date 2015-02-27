@@ -1,14 +1,25 @@
 var Repos = require('../models/repo');
-var github = require('../github');
+var github = require('./github');
 var error = require('./callbacks').error;
 
+exports.getRateLimit = function(req, res) {
+    github.getRateLimit(function (err, response, body){
+        if (err) {
+            error(res, err, "Could not fork Github");
+            return;
+        }
+        res.json(
+            // Send back our current rate limit.
+            JSON.parse(response.body).rate
+        );
+    })
+}
 
 exports.index = function(req, res) {
     res.render('index', {
         name: 'John'
     });
 };
-
 
 exports.allRepos = function(req, res) {
     Repos.find({}, function(err, data) {
