@@ -12,10 +12,15 @@ var RepoPage = React.createClass({
 var ReadMe = React.createClass({
     render: function () {
         github.README(this.props.name, function (data) {
+            var processedData = utils.showdownConverter.makeHtml(data);
             React.render(
                 (<div id="readme_contentBox">
                     <EditButton data = {data} content="readme"/>
-                    <div> {data} </div>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: processedData
+                      }}
+                    ></div>
                 </div>)
                 , document.getElementById('readme'));
         });
