@@ -12,15 +12,28 @@ var RepoPage = React.createClass({
 var RepoContent = React.createClass({
     render: function () {
         github.README(this.props.name, function (data) {
-            React.render(
-                (<div>
-                    {data}
-                </div>)
+            
+            //FIXME Add processing for Showdown here.
+            var processedData = showdownConverter.makeHtml(data);
+
+            React.render((
+
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: processedData
+                  }}
+                ></div>)
+
+                // <div>
+                //     {data}
+                // </div>
                 , document.getElementById('github_readme'));
         });
 
-        return (<div>
-            <div id="github_readme"> </div>
-            </div>);
+        return (
+            <div>
+                <div id="github_readme"></div>
+            </div>
+        );
     }
 });

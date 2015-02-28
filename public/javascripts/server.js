@@ -41,6 +41,8 @@ var github = {
     }
 }
 
+// Set the Showdown converter so that Markdown can become HTML.
+var showdownConverter = new Showdown.converter({ extensions: ['github'] });
 
 /* BASE 64 ENCODING / DECODING
  * From Scotch.io - used for Github Content
