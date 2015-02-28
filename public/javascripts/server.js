@@ -38,9 +38,16 @@ var github = {
           data: data,
           success: success,
         });
+    },
+
+    POST: function (path, data, success) {
+        $.post({
+          url: API + path,
+          data: data,
+          success: success,
+        });
     }
 }
-
 
 /* BASE 64 ENCODING / DECODING
  * From Scotch.io - used for Github Content
