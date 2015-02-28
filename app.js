@@ -44,6 +44,6 @@ app.get('/getRateLimit', base.getRateLimit);
 
 // POSTS
 app.post('/addRepo', base.addRepo);
-
+app.post('/pushContent', base.pushContent);
 
 app.listen(PORT);

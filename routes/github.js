@@ -30,6 +30,11 @@ exports.deleteRepo = function(user, repo, callback) {
     request.del(API + "repos/olinwikihub/" + repo, headers, callback);
 };
 
+// PUT /repos/:owner/:repo/contents/:path
+exports.pushContent = function(owner, repo, contents, path, callback) {
+	request.put(API + "repos/" + repo + "/contents/" + path, contents, callback);
+}
+
 // GET /repos/:owner/:repo/readme
 // exports.getReadMe = function(user, repo, callback) {
 // 	request.get(API + "repos/" + user + "/" + repo + "/readme") {
@@ -41,3 +46,4 @@ exports.deleteRepo = function(user, repo, callback) {
 exports.getRateLimit = function(callback) {
 	request.get(API + "rate_limit", headers, callback);
 }
+

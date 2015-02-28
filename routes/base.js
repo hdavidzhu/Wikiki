@@ -76,3 +76,15 @@ exports.addRepo = function(req, res) {
         });
     });
 }
+
+exports.pushContent = function(req, res) {
+    var owner = req.body.owner;
+    var repo = req.body.repo;
+    var editedContents = req.body.editedContents;
+    var path = req.body.path;
+    github.pushContent(owner, repo, editedContents, path, function (){
+        res.status(200).json({
+            success: true
+        })
+    });
+}
