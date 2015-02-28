@@ -19,6 +19,8 @@ var MainLayout = React.createClass({render: function() {return (
 <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/showdown/master/compressed/extensions/github.min.js"></script>
 
 <script type="text/javascript" src="/javascripts/server.js"></script>
+<script type="text/javascript" src="/javascripts/utils.js"></script>
+
 <script type="text/jsx" src="/jsx/components/NavBar.jsx"></script>
 <script type="text/jsx" src="/jsx/components/RepoListPage.jsx"></script>
 <script type="text/jsx" src="/jsx/components/RepoPage.jsx"></script>
