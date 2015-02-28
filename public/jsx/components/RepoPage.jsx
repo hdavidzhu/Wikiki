@@ -30,36 +30,36 @@ var EditContent = React.createClass({
             <div id="editContentForm">
                 <SaveButton content="contentBox" />
                 <textarea id="contentBox"> {this.props.data} </textarea>
-            <div>
+            </div>
         );
     }
 });
 
 var EditButton = React.createClass({
-    OnClick: function () {
-        removeElement({this.props.content + "_contentBox"});
+    whenClicked: function () {
+        removeElement(this.props.content + "_editContentForm");
 
-        React.render(
-            <div id={this.props.content + "_contentBox">
-                <SaveButton name={this.props.content + "_edit"}/>
+        React.render((
+            <div id={this.props.content + "_contentBox"}>
+                <SaveButton name={this.props.content + "_edit"} />
                 <EditContent name={this.props.content} data={this.props.data} />
-            </div>
+            </div>)
             , document.getElementById(this.props.content));
     },
     render: function () {
         return (
-            <button id={this.props.content + "_editButton"} onClick = {this.OnClick}> Edit </button>
+            <button id={this.props.content + "_editButton"} onClick = {this.whenClicked}> Edit </button>
         );
     }
 });
 
 var SaveButton = React.createClass({
-    OnClick: function () {
-        removeElement({this.props.content + "_editContentForm"});
+    whenClicked: function () {
+        removeElement(this.props.content + "_editContentForm");
     },
     render: function () {
         return (
-            <button id="saveButton" onClick = {this.OnClick}> Save </button>
+            <button id="saveButton" onClick = {this.whenClicked}> Save </button>
         );
     }
 });
