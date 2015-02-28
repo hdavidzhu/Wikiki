@@ -11,7 +11,16 @@ var RepoPage = React.createClass({
 
 var RepoContent = React.createClass({
     render: function () {
-        server.POST()
-        return <div>"hello"</div>
+        github.README(this.props.name, function (data) {
+            React.render(
+                (<div>
+                    {data}
+                </div>)
+                , document.getElementById('github_readme'));
+        });
+
+        return (<div>
+            <div id="github_readme"> </div>
+            </div>);
     }
 });

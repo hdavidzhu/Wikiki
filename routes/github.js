@@ -11,6 +11,10 @@ var headers = {
     }
 };
 
+exports.getRepoContent = function (repo, callback) {
+    request.get(API + "repos/OlinWikiHub/" + repo, headers, callback);
+}
+
 // GET /repos/:owner/:repo
 exports.validateREPO = function(user, repo, callback) {
     request.get(API + "repos/" + user + "/" + repo, headers, callback);

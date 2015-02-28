@@ -16,9 +16,7 @@ exports.getRateLimit = function(req, res) {
 }
 
 exports.index = function(req, res) {
-    res.render('index', {
-        name: 'John'
-    });
+    res.render('index');
 };
 
 exports.allRepos = function(req, res) {
@@ -51,7 +49,7 @@ exports.addRepo = function(req, res) {
     }
 
     // Validate Github API
-    github.validateREPO(parts[1], parts[2], function (err, response, body) {        
+    github.validateREPO(parts[1], parts[2], function (err, response, body) {
         if (err || response.statusCode/10 !== 20) {
             error(res, err, "Invalid Github Url");
             return;
