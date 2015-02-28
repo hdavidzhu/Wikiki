@@ -40,6 +40,7 @@ app.use(session({
 //GET
 app.get('/', base.index);
 app.get('/allRepos', base.allRepos);
+app.get('/getRateLimit', base.getRateLimit);
 
 // POSTS
 app.post('/addRepo', base.addRepo);
