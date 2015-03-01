@@ -1,3 +1,7 @@
+/**
+* Utility methods
+*/
+
 var utils = {
 	showdownConverter: new Showdown.converter({ extensions: ['github'] })
 }

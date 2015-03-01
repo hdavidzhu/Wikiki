@@ -1,3 +1,9 @@
+/**
+* Contains helper methods for making HTTP requests to our server
+* server - calls that require Github authentication (token)
+* github - calls that do not require authentication
+*/
+
 var server = {
     GET : function(url, data, callback) {
         $.get(url, data).done(function(data) {

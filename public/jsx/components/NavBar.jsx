@@ -1,3 +1,8 @@
+/**
+* Navigation Bar JSX
+* Loads the nav bar across the top
+*/
+
 var Navbar = React.createClass({
     render: function() {
         return (
@@ -18,6 +23,3 @@ var Navbar = React.createClass({
         );
     }
 });
-
-
-// <li><a href="./">Fixed top <span className="sr-only">(current)</span></a></li>
