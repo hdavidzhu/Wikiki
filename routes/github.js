@@ -1,3 +1,8 @@
+/**
+* Github Authenticated API
+* Contains the endpoints and API requests for authenticated github
+*/
+
 var request = require('request');
 var https = require('https');
 var secret = process.env.TOKEN || require('../secrets').TOKEN;
