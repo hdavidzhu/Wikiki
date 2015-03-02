@@ -1,3 +1,9 @@
+/**
+* Routes for our server
+* Handles querying our mongo database
+* Also handles making authenticated github requests
+*/
+
 var Repos = require('../models/repo');
 var github = require('./github');
 var error = require('./callbacks').error;
@@ -84,4 +90,9 @@ exports.pushContent = function(req, res) {
             success: true
         })
     });
+}
+
+exports.githubRedirect = function(req, res) {
+    // Catch all local Github links.
+    res.redirect("/");
 }

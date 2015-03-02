@@ -1,3 +1,8 @@
+/**
+* Github Authenticated API
+* Contains the endpoints and API requests for authenticated github
+*/
+
 var request = require('request');
 var https = require('https');
 var secret = process.env.TOKEN || require('../secrets').TOKEN;
@@ -40,15 +45,7 @@ exports.pushContent = function(owner, repo, contents, callback) {
 	request.put(API + "repos/" + owner + "/" + repo + "/contents/" + contents["path"], newContents, callback);
 }
 
-// GET /repos/:owner/:repo/readme
-// exports.getReadMe = function(user, repo, callback) {
-// 	request.get(API + "repos/" + user + "/" + repo + "/readme") {
-
-// 	}
-// }
-
 // GET /rate_limit
 exports.getRateLimit = function(callback) {
 	request.get(API + "rate_limit", headers, callback);
 }
-

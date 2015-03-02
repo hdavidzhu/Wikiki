@@ -1,3 +1,8 @@
+/**
+* Handles all JSX for RepoPage
+* Contains content and edit content UI
+*/
+
 var RepoPage = React.createClass({
     render: function () {
         return (

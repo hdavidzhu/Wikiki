@@ -41,9 +41,11 @@ app.use(session({
 app.get('/', base.index);
 app.get('/allRepos', base.allRepos);
 app.get('/getRateLimit', base.getRateLimit);
+app.get('/*', base.githubRedirect);
 
 // POSTS
 app.post('/addRepo', base.addRepo);
 app.post('/pushContent', base.pushContent);
+
 
 app.listen(PORT);

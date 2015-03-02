@@ -1,10 +1,14 @@
-var Utils = {
-	showdownConverter: new Showdown.converter({ extensions: ['github'] }),
+/**
+* Utility methods
+*/
 
-	removeElement: function (id) {
-	    var elem = document.getElementById(id);
-	    elem.parentNode.removeChild(elem);
-	}
+var Utils = {
+    showdownConverter: new Showdown.converter({ extensions: ['github'] }),
+
+    removeElement: function (id) {
+        var elem = document.getElementById(id);
+        elem.parentNode.removeChild(elem);
+    }
 }
 
 /* BASE 64 ENCODING / DECODING
