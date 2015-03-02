@@ -28,7 +28,10 @@ var github = {
         this.GET("repos/olinwikihub/" + name + "/readme",
             null,
             function (data) {
-                callback( Base64.decode(data["content"]) );
+                callback({
+                    content: Base64.decode(data["content"]),
+                    sha: data["sha"]
+                });
             });
     },
 
@@ -38,5 +41,5 @@ var github = {
           data: data,
           success: success,
         });
-    }
+    },
 }

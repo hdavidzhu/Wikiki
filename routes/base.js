@@ -76,3 +76,11 @@ exports.addRepo = function(req, res) {
         });
     });
 }
+
+exports.pushContent = function(req, res) {
+    github.pushContent("olinwikihub", req.body.repo, req.body, function (){
+        res.status(200).json({
+            success: true
+        })
+    });
+}
