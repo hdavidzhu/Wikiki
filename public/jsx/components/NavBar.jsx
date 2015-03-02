@@ -6,13 +6,9 @@
 var Navbar = React.createClass({
     render: function() {
         return (
-            <nav className="navbar navbar-default navbar-fixed-top">
-                <div className="container">
-                    <div className="navbar-header">
-                        <a className="navbar-brand" href="/">WikiHub</a>
-                    </div>
-                </div>
-            </nav>
+            <a href="/">
+                <img id="homeButtonWrapper" src="images/github2.png"></img>
+            </a>
         );
     }
 });

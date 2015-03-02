@@ -7,7 +7,7 @@ var React = window.React;
 
 React.render(
   <Navbar />,
-  document.getElementById('navbar')
+  document.getElementById('homeButton')
 );
 
 React.render(
