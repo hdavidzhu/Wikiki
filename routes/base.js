@@ -44,12 +44,16 @@ exports.addRepo = function(req, res) {
 
     // Error Checking
     var index = url.indexOf("github.com/");
-    if (index === -1 && url.indexOf(".com") > -1) {
-        error(res, null, "Not a Github Url");
-        return;
+    if (index === -1) {
+        if (url.indexOf(".com") > -1) {
+            error(res, null, "Not a Github Url");
+            return;
+        }
+    } else {
+        url = url.substring(index + 11, url.length);
     }
 
-    var parts = url.substring(index + 11, url.length).split("/");
+    var parts = url.split("/");
     if (parts.length !== 2) {
         error(res, null, "Invalid Url Pattern");
         return;
