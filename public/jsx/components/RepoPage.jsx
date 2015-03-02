@@ -11,11 +11,13 @@ var RepoPage = React.createClass({
 
 var ReadMe = React.createClass({
     render: function () {
+        var name = this.props.name;
         github.README(this.props.name, function (data) {
-            var processedData = Utils.showdownConverter.makeHtml(data);
+            console.log("Find it again!");
+            var processedData = Utils.showdownConverter.makeHtml(data["content"]);
             React.render(
                 (<div id="readme_contentBox">
-                    <EditButton data = {data} content="readme"/>
+                    <EditButton name={{name:name, sha:data["sha"]}} data={data["content"]} content="readme"/>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: processedData
@@ -31,11 +33,11 @@ var ReadMe = React.createClass({
 
 var EditButton = React.createClass({
     whenClicked: function () {
-        removeElement(this.props.content + "_contentBox");
+        Utils.removeElement(this.props.content + "_contentBox");
 
         React.render(
             <div id={this.props.content + "_editContentBox"}>
-                <EditContent content={this.props.content} data={this.props.data} />
+                <EditContent name={this.props.name} content={this.props.content} data={this.props.data} />
             </div>
             , document.getElementById(this.props.content));
     },
@@ -50,8 +52,8 @@ var EditContent = React.createClass({
     render: function ()  {
         return (
             <div>
-                <SaveButton content={this.props.content}/>
-                <textarea defaultValue={this.props.data}/>
+                <SaveButton name={this.props.name} content={this.props.content}/>
+                <textarea id={this.props.content + "_editedText"} defaultValue={this.props.data}/>
             </div>
         );
     }
@@ -59,7 +61,24 @@ var EditContent = React.createClass({
 
 var SaveButton = React.createClass({
     whenClicked: function () {
-        removeElement(this.props.content + "_editContentBox");
+        var name = this.props.name;
+        var content = this.props.content;
+        var data = document.getElementById(content + "_editedText").value;
+        Utils.removeElement(content + "_editContentBox");
+
+        // Add changes here.
+        // function(url, data, callback, uniqueError)
+        var editedContents = {
+            repo: name["name"],
+            message: "olinwikihub user #15 edit README", // FIXME Change the hardcode.
+            content: Base64.encode(data),
+            sha: name["sha"],
+            path: "README.md"
+        }
+
+        server.POST("/pushContent", editedContents, function(result){
+            React.renderComponent(<ReadMe name={name["name"]} />, document.getElementById(content));
+        });
     },
     render: function () {
         return (

@@ -31,8 +31,13 @@ exports.deleteRepo = function(user, repo, callback) {
 };
 
 // PUT /repos/:owner/:repo/contents/:path
-exports.pushContent = function(owner, repo, contents, path, callback) {
-	request.put(API + "repos/" + repo + "/contents/" + path, contents, callback);
+exports.pushContent = function(owner, repo, contents, callback) {
+    // contents["headers"] = headers["headers"];
+    var newContents = {
+        headers: headers["headers"],
+        json: contents
+    }
+	request.put(API + "repos/" + owner + "/" + repo + "/contents/" + contents["path"], newContents, callback);
 }
 
 // GET /repos/:owner/:repo/readme
