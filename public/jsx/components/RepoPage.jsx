@@ -13,7 +13,6 @@ var ReadMe = React.createClass({
     render: function () {
         var name = this.props.name;
         github.README(this.props.name, function (data) {
-            console.log("Find it again!");
             var processedData = Utils.showdownConverter.makeHtml(data["content"]);
             React.render(
                 (<div id="readme_contentBox">
@@ -66,8 +65,7 @@ var SaveButton = React.createClass({
         var data = document.getElementById(content + "_editedText").value;
         Utils.removeElement(content + "_editContentBox");
 
-        // Add changes here.
-        // function(url, data, callback, uniqueError)
+        // Package new JSON
         var editedContents = {
             repo: name["name"],
             message: "olinwikihub user #15 edit README", // FIXME Change the hardcode.
@@ -76,8 +74,9 @@ var SaveButton = React.createClass({
             path: "README.md"
         }
 
+        // Send Server changes for authenticated Push
         server.POST("/pushContent", editedContents, function(result){
-            React.renderComponent(<ReadMe name={name["name"]} />, document.getElementById(content));
+            React.render(<ReadMe name={name["name"]} />, document.getElementById(content));
         });
     },
     render: function () {
