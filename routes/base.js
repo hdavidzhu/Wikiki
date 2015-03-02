@@ -84,3 +84,8 @@ exports.pushContent = function(req, res) {
         })
     });
 }
+
+exports.githubRedirect = function(req, res) {
+    // Catch all local Github links.
+    res.redirect("/");
+}

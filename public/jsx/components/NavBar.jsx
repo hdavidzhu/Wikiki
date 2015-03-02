@@ -6,13 +6,6 @@ var Navbar = React.createClass({
                     <div className="navbar-header">
                         <a className="navbar-brand" href="/">WikiHub</a>
                     </div>
-                    <div id="navbar" className="navbar-collapse collapse">
-                        <ul className="nav navbar-nav">
-                        </ul>
-                        <ul className="nav navbar-nav navbar-right">
-                            <li><a href="#about">About</a></li>
-                        </ul>
-                    </div>
                 </div>
             </nav>
         );
