@@ -44,33 +44,35 @@ exports.addRepo = function(req, res) {
 
     // Error Checking
     var index = url.indexOf("github.com/");
-    if (index === -1) {
+    if (index === -1 && url.indexOf(".com") > -1) {
         error(res, null, "Not a Github Url");
         return;
     }
 
-    var parts = url.substring(index, url.length).split("/");
-    if (parts.length !== 3) {
+    var parts = url.substring(index + 11, url.length).split("/");
+    if (parts.length !== 2) {
         error(res, null, "Invalid Url Pattern");
         return;
     }
 
+    parts[1] = parts[1].replace(".git", "");
+
     // Validate Github API
-    github.validateREPO(parts[1], parts[2], function (err, response, body) {
+    github.validateREPO(parts[0], parts[1], function (err, response, body) {
         if (err || response.statusCode/10 !== 20) {
             error(res, err, "Invalid Github Url");
             return;
         }
         Repos({
-            name: parts[2],
-            owner: parts[1]
+            name: parts[1],
+            owner: parts[0]
         }).save(function(err, data) {
             if (err) {
                 error(res, err, "Could not save Github Repo");
                 return;
             }
 
-            github.forkRepo(parts[1], parts[2], function (err, response, body) {
+            github.forkRepo(parts[0], parts[1], function (err, response, body) {
                 if (err) {
                     error(res, err, "Could not fork Github");
                     return;
