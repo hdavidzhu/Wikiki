@@ -20,7 +20,8 @@ exports.index = function(req, res) {
 };
 
 exports.allRepos = function(req, res) {
-    Repos.find({}, function(err, data) {
+    Repos.find().sort({owner: 1, name: 1})
+    .exec(function(err, data) {
         if (err) {
             error(res, err, "Failed to load repos");
             return;

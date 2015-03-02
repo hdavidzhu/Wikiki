@@ -2,7 +2,7 @@ var RepoListBox = React.createClass({
   render: function() {
     server.GET('/allRepos', null, function (data) {
       React.render(
-          <div>
+          <div id="repoList">
             <AddRepoForm />
             <ReposList repos={data.repos}/>
           </div>,
@@ -27,14 +27,14 @@ var AddRepoForm = React.createClass({
         document.getElementById('container')
       );
     }, function (err, status) {
-      alert("Make sure URL is an existing Github HTTPS Clone URL");
+      alert("Make sure URL is an existing Github HTTPS URL.\n\nYou can get this by copy-pasting the link when you visit your Github repo page.");
     });
   },
 
   render: function () {
-    return  (<form onSubmit={this.handleSubmit}>
-              <input id="githuburl" type="text" placeholder="HTTPS clone URL"></input>
-              <input type="submit" value="Add"></input>
+    return  (<form id="addRepoForm" onSubmit={this.handleSubmit}>
+              <span><input id="githuburl" type="text" placeholder="HTTPS URL"></input></span>
+              <input id="githubSubmitButton" type="submit" value="Add"></input>
             </form>);
   }
 })

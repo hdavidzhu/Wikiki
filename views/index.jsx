@@ -7,11 +7,12 @@ var MainLayout = React.createClass({render: function() {return (
 </head>
 
 <body>
-    <div id = "navbar"></div>
+    <div id = "homeButton"></div>
     <div id = "container"></div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script src="http://fb.me/react-0.12.2.js"></script>
 <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
 

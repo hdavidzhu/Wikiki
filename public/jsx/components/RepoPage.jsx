@@ -1,7 +1,7 @@
 var RepoPage = React.createClass({
     render: function () {
         return (
-            <div>
+            <div id="repoPage">
                 <h1> @{this.props.owner}/{this.props.name}</h1>
                 <ReadMe name={this.props.name} />
             </div>

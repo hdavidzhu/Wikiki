@@ -2,10 +2,55 @@
 
 * {
     font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+}
+
+::-webkit-scrollbar {  
+    width: 12px;  
+}  
+::-webkit-scrollbar-track {  
+    background-color: #eaeaea;  
+    border-left: 1px dotted gray;  
+}  
+::-webkit-scrollbar-thumb {  
+    background-color: #ccc;  
+}  
+::-webkit-scrollbar-thumb:hover {  
+    background-color: #aaa;  
+}
+
+button, input[type=submit] {
+	border: 1px dotted gray;
+	background-color: transparent;
+	-webkit-transition: .1s ease-in-out;
+	transition: .1s ease-in-out;
+}
+
+button:hover, input[type=submit]:hover {
+	color: white;
+	background-color: #59006f;
+	font-weight: bold;
+}
+
+button:active, input[type=submit]:active {
+}
+
+input[type=text] {
+	border: 1px dotted gray;
+	padding: 5px;
+}
+
+input[type=text]:active {
+	border: 1px dotted gray;
+}
+
+body {
+	background-image: url('../images/cubes.png');
 }
 
 #container {
-    margin: 100px
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 /* List of Repo Page CSS*/
@@ -15,12 +60,88 @@ ul {
 }
 
 .repo > li {
-    padding: 20px 0px 0px 0px;
     margin-left:0px;
+		margin-top: 10px;
+		border: 1px dotted gray;
+		padding: 20px;
+		overflow: hidden;
+		-webkit-transition: .1s ease-in-out;
+		transition: .1s ease-in-out;
 }
 
 .repo > li:hover {
-    color: purple;
+		color: white;
+    background-color: #59006f;
     font-weight: bold;
     cursor: pointer;
+}
+
+#homeButtonWrapper {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+  border-radius: 50%;
+  left: 50%;
+	margin-left: -50px;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+#homeButtonWrapper:hover {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
+}
+
+#repoList {
+	width: 300px;
+	position: absolute;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: 120px;
+	overflow: hidden;
+}
+
+#githuburl {
+	width: 100%;
+}
+
+#addRepoForm span {
+	display: block;
+	overflow: hidden;
+}
+
+#githubSubmitButton {
+	float: block;
+	width: 100%;
+}
+
+#repoPage {
+	width: 900px;
+	position: absolute;
+	left: 50%;
+	margin-left: -450px;
+	margin-top: 120px;
+	overflow: hidden;
+	border: 1px dotted gray;
+	padding: 20px;
+}
+
+@media screen and (max-width: 930px) {
+	#repoPage {
+		width: 100%;
+		margin-top: 120px;
+		overflow: hidden;
+		border: 1px dotted gray;
+		padding: 20px;
+		margin-left: 0;
+		left: 0;
+	}
+}
+
+textarea {
+	width: 100%;
+	height: 600px;
+	resize: none;
+	padding: 20px;
 }
